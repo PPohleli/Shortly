@@ -32,7 +32,7 @@ namespace Shortly.Client.Controllers
                 {
                     Id = 3,
                     OriginalLink = "https://link2.com",
-                    ShortLink = "orgnl",
+                    ShortLink = "lnk2",
                     NrOfClicks = 3,
                     userId = 3,
                 }
