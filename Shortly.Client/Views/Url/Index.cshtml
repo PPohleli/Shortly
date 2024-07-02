@@ -1,10 +1,38 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<GetUrlVM>
 @{
+    ViewData["Title"] = "All short links";
 }
-@{
-    var currentDateTime = DateTime.UtcNow;
-}
-<h4>Welcome to this app</h4>
-<p>@currentDateTime</p>
+
+<div class="container">
+    <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index"> Add New</a>
+</div>
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Original link</th>
+                <th scope="col">Shortened link</th>
+                <th scope="col">Number of clocks</th>
+                <th scope="col">User</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var data in @Model)
+            {
+                <tr>
+                    <td>@data.Id</td>
+                    <td>@data.OriginalLink</td>
+                    <td>@data.ShortLink</td>
+                    <td>@data.NrOfClicks</td>
+                    <td>@data.userId</td>
+                    <td>
+                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">Remove</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
