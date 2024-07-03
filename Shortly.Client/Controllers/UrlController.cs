@@ -47,7 +47,12 @@ namespace Shortly.Client.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult Remove(int linkToRemove)
+        public IActionResult Remove(int id)
+        {
+            return View();
+        }
+
+        public IActionResult Remove(int userId, int linkId)
         {
             return View();
         }
