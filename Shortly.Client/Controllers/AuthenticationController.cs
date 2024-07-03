@@ -12,6 +12,10 @@ namespace Shortly.Client.Controllers
         {
             return View();
         }
+        public IActionResult LoginSubmitted(string emailAddress, string password)
+        {
+            return View();
+        }
         public IActionResult Register()
         {
             return View();
