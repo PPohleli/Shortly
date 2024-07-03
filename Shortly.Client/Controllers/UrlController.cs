@@ -47,5 +47,9 @@ namespace Shortly.Client.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult Remove(int linkToRemove)
+        {
+            return View();
+        }
     }
 }

@@ -29,7 +29,9 @@
                     <td>@data.NrOfClicks</td>
                     <td>@data.userId</td>
                     <td>
-                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove">Remove</a>
+                        @* Passing data in Query strings *@
+                        @* <a class="btn btn-outline-danger" href="/Url/Remove?linkToRemove=@data.Id">Remove</a> *@
+                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-linkToRemove="@data.Id">Remove</a>
                     </td>
                 </tr>
             }
