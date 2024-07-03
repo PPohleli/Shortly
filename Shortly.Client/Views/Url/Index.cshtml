@@ -31,7 +31,11 @@
                     <td>
                         @* Passing data in Query strings *@
                         @* <a class="btn btn-outline-danger" href="/Url/Remove?linkToRemove=@data.Id">Remove</a> *@
-                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-linkToRemove="@data.Id">Remove</a>
+                        @* <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-linkToRemove="@data.Id">Remove</a> *@
+
+                        @* Parsing arameters as Route Data *@
+                        @* <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-id="@data.Id">Remove</a> *@
+                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-userId="@data.userId" asp-route-linkId="@data.Id">Remove</a>
                     </td>
                 </tr>
             }
