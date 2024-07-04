@@ -10,7 +10,7 @@ namespace Shortly.Client.Data.ViewModels
         public string EmailAddress { get; set; }
 
         [Required(ErrorMessage = "Password is required!")]
-        [MinLength(5, ErrorMessage ="Password must be at least 5 characters")]
+        //[MinLength(5, ErrorMessage ="Password must be at least 5 characters")]
         public string Password { get; set; }
     }
 }
