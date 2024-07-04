@@ -15,6 +15,8 @@ namespace Shortly.Client.Controllers
         }
         public IActionResult LoginSubmitted(LoginVM loginVM)
         {
+            if (!ModelState.IsValid)
+                return View("Login",loginVM);
             return RedirectToAction("Index","Home");
         }
         public IActionResult Register()
