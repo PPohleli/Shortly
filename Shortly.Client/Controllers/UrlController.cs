@@ -1,42 +1,29 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shortly.Client.Data.ViewModels;
+using Shortly.Data;
 
 namespace Shortly.Client.Controllers
 {
     public class UrlController : Controller
     {
+        private AppDbContext _context;
+        public UrlController(AppDbContext context) 
+        {
+            this._context = context;
+        }
+
         public IActionResult Index()
         {
-            //Fake Db data
-
-            var allUrls = new List<GetUrlVM>()
+            var allUrls = _context.Urls.Select(url => new GetUrlVM()
             {
-                new GetUrlVM()
-                {
-                    Id = 1,
-                    OriginalLink = "https://original.com",
-                    ShortLink = "orgnl",
-                    NrOfClicks = 1,
-                    userId = 1,
-                },
-                new GetUrlVM()
-                {
-                    Id = 2,
-                    OriginalLink = "https://link1.com",
-                    ShortLink = "lnk1",
-                    NrOfClicks = 2,
-                    userId = 2,
-                },
-                new GetUrlVM()
-                {
-                    Id = 3,
-                    OriginalLink = "https://link2.com",
-                    ShortLink = "lnk2",
-                    NrOfClicks = 3,
-                    userId = 3,
-                }
-            };
+                Id = url.Id,
+                OriginalLink = url.OriginalLink,
+                ShortLink = url.ShortLink,
+                NrOfClicks = url.NrOfClicks,
+                userId = url.userId
+            }).ToList();
 
+            
             return View(allUrls);
         }
 
