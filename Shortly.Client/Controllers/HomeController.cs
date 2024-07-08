@@ -40,7 +40,7 @@ namespace Shortly.Client.Controllers
             
             _appDbContext.Urls.Add(newUrl);
             _appDbContext.SaveChanges();
-
+            TempData["Message"] = $"Your URL was shortened successfully to {newUrl.ShortLink}";
             return RedirectToAction("Index");
         }
 
