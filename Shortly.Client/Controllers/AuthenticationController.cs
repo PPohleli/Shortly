@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shortly.Client.Data.ViewModels;
+using Shortly.Data;
 
 namespace Shortly.Client.Controllers
 {
     public class AuthenticationController : Controller
     {
+        private AppDbContext _appDbContext;
+        public AuthenticationController(AppDbContext appContext) 
+        {
+            _appDbContext = appContext;
+        }
         public IActionResult Users()
         {
-            return View();
+            var user = _appDbContext.Users.ToList();
+            return View(user);
         }
         public IActionResult Login()
         {
