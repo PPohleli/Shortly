@@ -39,7 +39,7 @@
                     <td>@data.OriginalLink</td>
                     <td>@data.ShortLink</td>
                     <td>@data.NrOfClicks</td>
-                    <td>@data.userId</td>
+                    <td>@(data.User != null ? data.User.FullName : "-")</td>
                     <td>
                         @* Passing data in Query strings *@
                         @* <a class="btn btn-outline-danger" href="/Url/Remove?linkToRemove=@data.Id">Remove</a> *@
