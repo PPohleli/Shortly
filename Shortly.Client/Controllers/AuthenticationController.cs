@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Shortly.Client.Data.ViewModels;
 using Shortly.Data;
 
@@ -13,7 +14,7 @@ namespace Shortly.Client.Controllers
         }
         public IActionResult Users()
         {
-            var user = _appDbContext.Users.ToList();
+            var user = _appDbContext.Users.Include(n => n.Urls).ToList();
             return View(user);
         }
         public IActionResult Login()
