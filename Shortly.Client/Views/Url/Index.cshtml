@@ -2,6 +2,18 @@
 @{
     ViewData["Title"] = "All short links";
 }
+@{
+    if (TempData["Message"] != null)
+    {
+        <div class="container">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Success!</strong> @TempData["Message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        <br />
+    }
+}
 
 <div class="container">
     <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index"> Add New</a>
@@ -33,9 +45,9 @@
                         @* <a class="btn btn-outline-danger" href="/Url/Remove?linkToRemove=@data.Id">Remove</a> *@
                         @* <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-linkToRemove="@data.Id">Remove</a> *@
 
-                        @* Parsing arameters as Route Data *@
-                        @* <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-id="@data.Id">Remove</a> *@
-                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-userId="@data.userId" asp-route-linkId="@data.Id">Remove</a>
+                        @* Parsing Parameters as Route Data *@
+                        <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-id="@data.Id">Remove</a>
+                        @* <a class="btn btn-outline-danger" asp-controller="Url" asp-action="Remove" asp-route-userId="@data.userId" asp-route-linkId="@data.Id">Remove</a> *@
                     </td>
                 </tr>
             }
