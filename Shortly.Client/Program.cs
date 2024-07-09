@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shortly.Client.Data;
 using Shortly.Data;
+using Shortly.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// Add services to the container - register services to be used for DI
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IUrlsService, UrlsService>();
 
 var app = builder.Build();
 
