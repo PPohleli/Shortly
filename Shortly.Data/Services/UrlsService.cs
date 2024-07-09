@@ -18,7 +18,8 @@ namespace Shortly.Data.Services
 
         public Url GetUrlById(int id)
         {
-            throw new NotImplementedException();
+            var url = _context.Urls.FirstOrDefault(x => x.Id == id);
+            return url;
         }
 
         public List<Url> GetUrls()
@@ -28,15 +29,32 @@ namespace Shortly.Data.Services
         }
         public Url Add(Url url)
         {
-            throw new NotImplementedException();
+            _context.Urls.Add(url);
+            _context.SaveChanges();
+            return url;
         }
         public Url Update(int id, Url url)
         {
-            throw new NotImplementedException();
+            var urlDb = _context.Urls.FirstOrDefault(x => x.Id == id);
+            if (urlDb != null)
+            {
+                url.OriginalLink = urlDb.OriginalLink;
+                url.ShortLink = urlDb.ShortLink;
+                url.DateUpdated = DateTime.UtcNow;
+
+                _context.SaveChanges();
+
+            }
+            return urlDb;
         }
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var urlDb = _context.Urls.FirstOrDefault(x => x.Id == id);
+            if (urlDb != null)
+            {
+                _context.Remove(urlDb);
+                _context.SaveChanges();
+            }
         }
 
         
