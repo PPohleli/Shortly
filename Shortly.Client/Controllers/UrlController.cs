@@ -2,20 +2,21 @@
 using Microsoft.EntityFrameworkCore;
 using Shortly.Client.Data.ViewModels;
 using Shortly.Data;
+using Shortly.Data.Services;
 
 namespace Shortly.Client.Controllers
 {
     public class UrlController : Controller
     {
-        private AppDbContext _context;
-        public UrlController(AppDbContext context) 
+        private IUrlsService _urlService;
+        public UrlController(IUrlsService urlService) 
         {
-            this._context = context;
+            this._urlService = urlService;
         }
 
         public IActionResult Index()
         {
-            var allUrls = _context.Urls.Include(n => n.User).Select(url => new GetUrlVM()
+            var allUrls = _urlService.GetUrls().Select(url => new GetUrlVM()
             {
                 Id = url.Id,
                 OriginalLink = url.OriginalLink,
@@ -43,9 +44,8 @@ namespace Shortly.Client.Controllers
         }
         public IActionResult Remove(int id)
         {
-            var url = _context.Urls.FirstOrDefault(n => n.Id == id);
-            _context.Urls.Remove(url);
-            _context.SaveChanges();
+            _urlService.Delete(id);
+
             TempData["Message"] = $"Your URL was successfully deleted";
             return RedirectToAction("Index");
         }
