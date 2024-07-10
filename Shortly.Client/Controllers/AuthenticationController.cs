@@ -13,26 +13,26 @@ namespace Shortly.Client.Controllers
         {
             _userService = userService;
         }
-        public IActionResult Users()
+        public async Task<IActionResult> Users()
         {
-            var user = _userService.GetUsers();
+            var user = await _userService.GetUsersAsync();
             return View(user);
         }
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             return View(new LoginVM());
         }
-        public IActionResult LoginSubmitted(LoginVM loginVM)
+        public async Task<IActionResult> LoginSubmitted(LoginVM loginVM)
         {
             if (!ModelState.IsValid)
                 return View("Login",loginVM);
             return RedirectToAction("Index","Home");
         }
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             return View(new RegisterVM());
         }
-        public IActionResult RegisterUser(RegisterVM registerVM)
+        public async Task<IActionResult> RegisterUser(RegisterVM registerVM)
         {
             if (!ModelState.IsValid)
                 return View("Register", registerVM);

@@ -16,44 +16,44 @@ namespace Shortly.Data.Services
             this._context = context; 
         }
 
-        public Url GetUrlById(int id)
+        public async Task<Url> GetUrlByIdAsync(int id)
         {
-            var url = _context.Urls.FirstOrDefault(x => x.Id == id);
+            var url = await _context.Urls.FirstOrDefaultAsync(x => x.Id == id);
             return url;
         }
 
-        public List<Url> GetUrls()
+        public async Task<List<Url>> GetUrlsAsync()
         {
-            var allUrls = _context.Urls.Include(n => n.User).ToList();
+            var allUrls = await _context.Urls.Include(n => n.User).ToListAsync();
             return allUrls;
         }
-        public Url Add(Url url)
+        public async Task<Url> AddAsync(Url url)
         {
-            _context.Urls.Add(url);
-            _context.SaveChanges();
+            await _context.Urls.AddAsync(url);
+            await _context.SaveChangesAsync();
             return url;
         }
-        public Url Update(int id, Url url)
+        public async Task<Url> UpdateAsync(int id, Url url)
         {
-            var urlDb = _context.Urls.FirstOrDefault(x => x.Id == id);
+            var urlDb = await _context.Urls.FirstOrDefaultAsync(x => x.Id == id);
             if (urlDb != null)
             {
                 url.OriginalLink = urlDb.OriginalLink;
                 url.ShortLink = urlDb.ShortLink;
                 url.DateUpdated = DateTime.UtcNow;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
             }
             return urlDb;
         }
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var urlDb = _context.Urls.FirstOrDefault(x => x.Id == id);
+            var urlDb = await _context.Urls.FirstOrDefaultAsync(x => x.Id == id);
             if (urlDb != null)
             {
                 _context.Remove(urlDb);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 

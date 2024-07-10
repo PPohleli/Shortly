@@ -9,11 +9,11 @@ namespace Shortly.Data.Services
 {
     public interface IUrlsService
     {
-        List<Url> GetUrls();
-        Url Add(Url url);
-        Url GetUrlById(int id);
-        Url Update(int id, Url url);
-        void Delete(int id);
+        Task<List<Url>> GetUrlsAsync();
+        Task<Url> AddAsync(Url url);
+        Task<Url> GetUrlByIdAsync(int id);
+        Task<Url> UpdateAsync(int id, Url url);
+        Task DeleteAsync(int id);
 
     }
 }

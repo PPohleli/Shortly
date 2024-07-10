@@ -18,24 +18,22 @@ namespace Shortly.Client.Controllers
             this._mapper = mapper;  
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var allUrls = _urlService.GetUrls();
+            var allUrls = await _urlService.GetUrlsAsync();
             var mappedAllUrls = _mapper.Map<List<Url>, List<GetUrlVM>>(allUrls);
             
             
             return View(mappedAllUrls);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            
-
             return RedirectToAction("Index");
         }
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
-            _urlService.Delete(id);
+            await _urlService.DeleteAsync(id);
 
             TempData["Message"] = $"Your URL was successfully deleted";
             return RedirectToAction("Index");

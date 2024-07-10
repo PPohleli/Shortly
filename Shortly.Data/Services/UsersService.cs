@@ -16,45 +16,45 @@ namespace Shortly.Data.Services
             this._context = context;
         }
 
-        public User GetUrlById(int id)
+        public async Task<User> GetUrlByIdAsync(int id)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
             return user;
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
-            var allUsers = _context.Users.Include(n => n.Urls).ToList();
+            var allUsers = await _context.Users.Include(n => n.Urls).ToListAsync();
             return allUsers;
         }
-        public User Add(User user)
+        public async Task<User> AddAsync(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
             return user;
         }
-        public User Update(int id, User user)
+        public async Task<User> UpdateAsync(int id, User user)
         {
-            var userDb = _context.Users.FirstOrDefault(u => u.Id == id);
+            var userDb = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             if (userDb != null)
             {
                 userDb.Email = user.Email;
                 userDb.FullName = user.FullName;
 
-                _context.Update(user); // can remove this line - just kept for readability.
-                _context.SaveChanges();
+                //await _context.Update(user); // can remove this line - just kept for readability.
+                await _context.SaveChangesAsync();
             }
 
             return userDb;
         }
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var userDb = _context.Users.FirstOrDefault(u => u.Id == id);
+            var userDb = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             if (userDb != null)
             {
                 _context.Users.Remove(userDb);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
