@@ -12,7 +12,7 @@ namespace Shortly.Data.Models
         public string OriginalLink { get; set; }
         public string ShortLink { get; set; }
         public int NrOfClicks { get; set; }
-        public int? userId { get; set; }
+        public string? userId { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
 
