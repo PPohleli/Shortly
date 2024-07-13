@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shortly.Client.Data.ViewModels;
+using Shortly.Client.Helpers.Roles;
 using Shortly.Data;
 using Shortly.Data.Models;
 using Shortly.Data.Services;
+using System.Security.Claims;
 
 namespace Shortly.Client.Controllers
 {
@@ -20,9 +22,13 @@ namespace Shortly.Client.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var allUrls = await _urlService.GetUrlsAsync();
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var isAdmin = User.IsInRole(Role.Admin);
+
+
+
+            var allUrls = await _urlService.GetUrlsAsync(loggedInUserId, isAdmin);
             var mappedAllUrls = _mapper.Map<List<Url>, List<GetUrlVM>>(allUrls);
-            
             
             return View(mappedAllUrls);
         }

@@ -3,6 +3,7 @@ using Shortly.Client.Data.ViewModels;
 using Shortly.Data;
 using Shortly.Data.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Shortly.Client.Controllers
 {
@@ -29,12 +30,14 @@ namespace Shortly.Client.Controllers
             if (!ModelState.IsValid)
                 return View("Index", postUrlVM);
 
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var newUrl = new Url()
             {
                 OriginalLink = postUrlVM.Url,
                 ShortLink = GeneratShortUrl(6),
                 NrOfClicks = 0,
-                userId = null,
+                userId = loggedInUserId,
                 DateCreated = DateTime.UtcNow
             };
             
