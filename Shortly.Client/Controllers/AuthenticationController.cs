@@ -65,5 +65,11 @@ namespace Shortly.Client.Controllers
                 return View("Register", registerVM);
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
