@@ -29,6 +29,16 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+// 3. Update default password settings
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 5;
+});
+
 // Add services to the container - register services to be used for DI
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IUrlsService, UrlsService>();
