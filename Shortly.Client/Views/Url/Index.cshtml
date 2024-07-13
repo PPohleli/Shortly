@@ -27,7 +27,11 @@
                 <th scope="col">Original link</th>
                 <th scope="col">Shortened link</th>
                 <th scope="col">Number of clocks</th>
-                <th scope="col">User</th>
+
+                @if (User.IsInRole(Role.Admin))
+                {
+                    <th scope="col">User</th>
+                }
                 <th scope="col">Options</th>
             </tr>
         </thead>
@@ -39,7 +43,10 @@
                     <td>@data.OriginalLink</td>
                     <td>@data.ShortLink</td>
                     <td>@data.NrOfClicks</td>
-                    <td>@(data.User != null ? data.User.FullName : "-")</td>
+                    @if (User.IsInRole(Role.Admin))
+                    {
+                        <td>@(data.User != null ? data.User.FullName : "-")</td>
+                    }
                     <td>
                         @* Passing data in Query strings *@
                         @* <a class="btn btn-outline-danger" href="/Url/Remove?linkToRemove=@data.Id">Remove</a> *@
