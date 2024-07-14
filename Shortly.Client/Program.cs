@@ -39,10 +39,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 5;
 
-    //lockout settings
+    // lockout settings
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
 
+
+    // Signin settings
+    options.SignIn.RequireConfirmedEmail = true;
 });
 
 // Add services to the container - register services to be used for DI
