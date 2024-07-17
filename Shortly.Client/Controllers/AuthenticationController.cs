@@ -131,5 +131,22 @@ namespace Shortly.Client.Controllers
             var confirmEmail = new ConfirmLoginVM();
             return View(confirmEmail);
         }
+
+        public async Task<IActionResult> SendEmailConfirmation(ConfirmLoginVM confirmLoginVM)
+        {
+            //1. Check if user exist
+            var user = await _userManager.FindByEmailAsync(confirmLoginVM.EmailAddress);
+
+            //2. Create confirmation link if user does exist
+            if (user != null)
+            {
+                var userToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                //3. Send the email
+
+            }
+
+
+        }
     }
 }
